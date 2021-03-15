@@ -10,7 +10,7 @@
    </style>
 </head>
 <td width="190" valign="top">
-			<b>&nbsp;Teacher Panel</b><hr/>
+			<b>&nbsp;Account</b><hr/>
 			
             <ul>
                 <li><a href="Dashboard.php" >Dashboard</a></li>

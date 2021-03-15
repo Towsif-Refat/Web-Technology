@@ -23,48 +23,42 @@
 <body>
 </body>
 </html>
+
 <?php
 
-    $cpass = $npass = $rnpass = "";
-    $cpass = " ";
-    $ecpass = $enpass = $ernpass = "";
+    $pass = $npass = $cnpass = "";
+    $epass = $enpass = $ecnpass = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        //Password
-        if(empty($_POST["cpass"]) && empty($_POST["npass"]) && empty($_POST["rnpass"]))
+        if(empty($_POST["pass"]) && empty($_POST["npass"]) && empty($_POST["cnpass"]))
         {
-            $ecpass = "Old Password is requied";
-            $enpass = "New Password can't be empty!";
-            $ernpass = "Retype New Password";
+            $epass = "Plese Enter Your Password";
+            $enpass = "Please Enter Your New password";
+            $ecnpass = "Please confirm Your New Password";
         }
         else
         {
-            $cpass = test_input($_POST["cpass"]);
+            $pass = test_input($_POST["pass"]);
             $npass = test_input($_POST["npass"]);
-            $rnpass = test_input($_POST["rnpass"]);
+            $cnpass = test_input($_POST["cnpass"]);
 
-            if (strlen($_POST["cpass"]) <= 7) 
+            if (strlen($_POST["pass"]) <= 7) 
             {
-                $ecpass = "Your Password Must Contain At Least 8 Characters!";
+                $epass = "Your Password Must Contain At Least 8 Characters";
             }
-            else if(!preg_match("#[a-zA-Z0-9-. ?!]+#",$cpass)) 
+            else if(!preg_match('/[$%@#]/', $pass))
             {
-                $ecpass = "Your Password Must Contain At Least one Number or Character!";
-            }
-            /*else if(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass))*/
-            else if(!preg_match('/[$%@#]/', $cpass))
-            {
-                $ecpass = "Your Password Must Contain At Least one special character(@,#,$,%)!";
+                $epass = "Your Password Must Contain At Least one special character(@,#,$,%)";
             }
 
-            if($cpass == $npass)
+            if($pass == $npass)
             {
-                $enpass = "Current password and New password cannot be same!";
+                $enpass = "Password & New Password cannot be same";
             }
-            if($npass != $rnpass)
+            if($npass != $cnpass)
             {
-                $ernpass = "New password and Retype password must be same!";
+                $ecnpass = "New password & Retype Password must be same";
             }
         }
     }
@@ -79,29 +73,35 @@
 ?>
 <fieldset>
     <legend><b>CHANGE PASSWORD</b></legend>
-    <form action="#" method="POST">
+    <form method="POST">
         <table>
             <tr>
-                <td>Current Password</td>
+                <td>Password</td>
                 <td>:</td>
-                <td><input type="text" name="cpass" value="<?php echo $cpass;?>" ><span class="error"></span><br></td>
+                <td><input type="password" name="pass" value="<?php echo $pass;?>" >
+                <span class="error"><?php echo $epass;?></span><br></td>
             </tr>
 
             <tr>
-                <td><span class="npass">New Password</span></td>
+                <td><span style="color: green">New Password</span></td>
                 <td>:</td>
-                <td><input type="text" name="npass" value="<?php echo $npass;?>" ><span class="error"></span><br>
+                <td><input type="password" name="npass" value="<?php echo $npass;?>" >
+                <span class="error"><?php echo $enpass;?></span><br>
             </tr>
 
             <tr>
-                <td><span class="rnpass">Retype New Password</span></td>
+                <td><span class="error">Retype New Password</span></td>
                 <td>:</td>
-                <td><input type="text" name="rnpass" value="<?php echo $rnpass;?>" ><span class="error"></span><br>
+                <td><input type="password" name="cnpass" value="<?php echo $cnpass;?>" >
+                <span class="error"><?php echo $ecnpass;?></span><br>
             </tr>
 
         </table>
         <hr/>
-        <input type="submit" name="submit" value="Submit" style="width: 60px">
+        <input type="submit" name="submit" value="Submit" >
         
     </form>
 </fieldset>
+    </form>
+
+

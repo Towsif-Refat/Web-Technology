@@ -99,7 +99,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
       {
         $erpass = "Your Password Must Contain At Least one Number or Character!";
       }
-      /*else if(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass))*/
       else if(!preg_match('/[$%@#]/', ($_POST["pass"])))
       {
         $erpass = "Your Password Must Contain At Least one special character(@,#,$,%)!";
@@ -130,7 +129,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
           if(file_put_contents('data.json', $final_data))
           {  
-            $message = "<label class='text-success'>File Appended Successfully</p>";
+            $message = "<label class='text-success'>Sign Up Successfully</p>";
           }
         }
         else  
